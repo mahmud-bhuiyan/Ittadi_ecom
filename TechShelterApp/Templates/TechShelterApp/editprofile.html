@@ -1,0 +1,49 @@
+{% extends 'TechShelterApp/main.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<h2 style="padding:0 30px 10px;">Profile</h2>
+
+<div style="margin: 0 20px;">
+		<form method="POST" enctype="multipart/form-data" novalidate style="padding: 15px;">
+			
+			<img src="{{user.imageURL}}" style="width:80px;height:80px; border-radius: 50%; float: left;position:sticky;"></img>
+			<h3 style="float: left; margin-top:0px; padding-left:20px;">Username: {{user.username}}</h3>
+			</br>
+			<h4 style="padding-top: 13px;padding-left: 100px; color: black;">Name: {{user.get_full_name}}</h4>
+			<h5 style="padding-top: 10px;padding-left: 100px;">Email: {{user.email}}</h5>
+			<br><br><br>
+			{% csrf_token %}
+			
+			{{ form.non_field_errors }}
+
+			{% for hidden_field in form.hidden_fields %}
+			  {{ hidden_field.errors }}
+			  {{ hidden_field }}
+			{% endfor %}
+		  
+			<table style="margin: 0 100px;">
+			  {% for field in form.visible_fields %}
+				<tr style="height: 30px;">
+				  <th style="width: 5%;">{{ field.label_tag }}</th>
+				  <td style="width: 40%; padding: 10px;">
+					
+					{% render_field field style="color:white ; background-color:rgba(0, 0, 0, 0.281); border-radius: 5px; border: 2px dashed transparent; width:100%" placeholder=field.name %}<br>
+					
+				  </td>
+				</tr>
+			  {% endfor %}
+			</table>
+				
+			
+			<input class="pluscart btn btn-success" type="submit" name="submit" value="Update" style="margin-left: 100px;">
+			<!-- <a href="{% url 'password_reset' %}" class="btn btn-primary" style="margin-left: 10px; padding: 6px 50px; ">Change Password</a> -->
+			<!-- DELETE BUTTON -->
+			{% if logged_in_user.is_superuser %}
+				<a class="btn btn-danger"style="margin-left: 10px; padding: 6px 60px;" href="{% url 'deleteprofile' user.id %}">Delete Account</a>
+			{% endif %}
+    	</h4>
+		</form>
+	</div>
+{% endblock content %}

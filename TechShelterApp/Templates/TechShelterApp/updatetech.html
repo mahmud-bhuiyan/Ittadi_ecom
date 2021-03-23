@@ -1,0 +1,24 @@
+{% extends 'TechShelterApp/main.html' %}
+{% load static %}
+{% block content %}
+
+<h1 style="padding:0 30px 10px;">Update Product</h1>
+<div class="row" style="margin: 0px 17px;">
+	<div class="col-lg-4">
+		<img src="{{this_tech.pictureURL}}" style="width:100%;"></img>
+	</div>
+
+	<div class="col-lg-8">
+		<div class="row" style="border-radius:3px;width: fit-content; padding:30px; margin: auto; background-image: linear-gradient(to right, #fff, #fff );">
+			<h3 style="color: black; padding: 0 0 15px; margin: 0;">{{this_tech.techname}}</h3>
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form}}
+			<input class="pluscart btn btn-success" type="submit" name="submit" value="Update" style="margin: 10px 0 0; width: fit-content;">
+		</form>
+	</div>
+	</div>
+</div>
+
+
+{% endblock content %}

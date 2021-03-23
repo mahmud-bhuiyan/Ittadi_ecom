@@ -1,0 +1,52 @@
+{% extends 'TechShelterApp/main.html' %}
+{% load static %}
+{% block content %}
+
+<h1 style="padding:0 30px 10px;">My Orders</h1>
+
+{% if not orderhistory %}
+<h3 style="text-align: center;">No order found!</h1>
+	{% else %}
+	<div class="row" style="margin: 0px 17px;">
+	<div class="col-lg-12" style="padding: 0 15px;">
+
+		<div class="box-element">
+
+			<div class="cart-row" style="text-align: center;">
+				<div style="flex:1"><strong>Product Image</strong></div>
+				<div style="flex:2"><strong>Item</strong></div>
+				<div style="flex:1"><strong>Seller</strong></div>	
+				<div style="flex:1"><strong>Transaction ID</strong></div>
+				<div style="flex:1"><strong>Date</strong></div>
+			</div>
+
+            {% for orderedtech in orderedtechs %}
+				{% if orderedtech.order.complete and orderedtech.order.customer.username == logged_in_user.username %}
+				<div class="cart-row">
+					<div style="flex:1; text-align: center;"><img class="row-image" src="{{orderedtech.tech.pictureURL}}"></div>
+					<div style="flex:2; text-align: center; padding-top: 10px;">
+						<p>{{orderedtech.tech.techname}}</p>
+					</div>
+					<div style="flex:1; text-align: center; padding-top: 10px;">
+						<p>{{orderedtech.tech.seller}}</p>		
+					</div>
+					<div style="flex:1; text-align: center; padding-top: 10px;">
+						<p>{{orderedtech.order.transaction_id}}</p>
+    	            </div>
+					<div style="flex:1; text-align: center; padding-top: 10px;">
+						<p>{{orderedtech.order.date_ordered}}</p>
+					</div>
+            	</div>
+            	{% endif %}
+			{% endfor %}
+
+		
+		</div>
+
+	</div>
+</div>
+
+
+{% endif %}
+
+{% endblock content %}

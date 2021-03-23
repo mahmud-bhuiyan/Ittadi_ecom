@@ -1,0 +1,67 @@
+{% extends 'TechShelterApp/main.html' %}
+{% load static %}
+{% block content %}
+
+<h1 style="padding:0 30px 10px;">CART</h1>
+{% if orderinfo.get_cart_item_quantity is not 0 %}
+<div class="row" style="margin: 0px 30px;">
+	<div class="col-lg-12" style="padding: 0px 0px;">
+		<div class="box-element">
+			<div style="float: left; padding: 20px 30px;">
+				<a class="btn btn-outline-dark" href="{% url 'tech_shelter' %}"
+				style="color:rgb(254, 254, 255); background-color: rgba(0, 162, 255, 0.671); box-shadow: 2px 2px 2px black;">&#x2190;
+				Continue Shopping</a>
+			</div>
+			<div style="float: right; color: black;padding: 5px 30px;">
+				<h5>Items: <strong>{{orderinfo.get_cart_item_quantity}}</strong></h5>
+				<h5>Total: <strong>৳{{orderinfo.get_cart_total_price}}</strong></h5>
+				<a id="checkout-btn"
+							class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+			</div>
+			<br><br><br><br><br><br>
+			<div class="cart-row" style="padding: 10px; text-align: center; background-color: #696969; margin: 0 30px; color: white;">
+				<div style="flex:1"><strong>Product</strong></div>
+				<div style="flex:2"><strong>Item</strong></div>
+				<div style="flex:1"><strong>Price</strong></div>
+				<div style="flex:1"><strong>Quantity</strong></div>
+				<div style="flex:1"><strong>Total</strong></div>
+			</div>
+
+
+
+			{% for orderedtech in orderedtechs %}
+			<div class="cart-row" style="padding-top: 10px; text-align: center; margin: 0 30px;">
+
+				<div style="flex:1; padding-top: 0;"><img class="row-image" src="{{orderedtech.tech.pictureURL}}"></div>
+				<div style="flex:2; padding-top: 35px;">
+					<p>{{orderedtech.tech.techname}}</p>
+				</div>
+				<div style="flex:1; padding-top: 35px;">
+					<p>৳{{orderedtech.tech.price|floatformat:2}}</p>
+				</div>
+				<div style="flex:1; padding-top: 20px;">
+					<p class="quantity">{{orderedtech.quantity}}</p>
+
+					<div class="quantity" style="padding-top: 0;">
+						<i class='fa fa-chevron-up chg-quantity update-cart' data-tech={{orderedtech.tech.id}}
+							data-action="add" style="padding:0px;margin: 0px;"></i>
+						</br>
+						<i class='fa fa-chevron-down chg-quantity update-cart' data-tech={{orderedtech.tech.id}}
+							data-action="remove" style="padding:0px; margin:0px;"></i>
+					</div>
+				</div>
+				<div style="flex:1; padding-top: 35px;">
+					<p>৳{{orderedtech.get_total_price}}</p>
+				</div>
+
+			</div>
+			{% endfor %}
+
+		
+		</div>
+	</div>
+</div>
+{% else %}
+<h3 style="text-align: center; color: rgba(255, 255, 255, 0.493)">Your cart seems empty!</h1>
+{% endif %}
+{% endblock content %}

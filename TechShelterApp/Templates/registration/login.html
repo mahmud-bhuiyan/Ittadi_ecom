@@ -1,0 +1,15 @@
+{% extends 'TechShelterApp/actionpage.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="pagename" style="text-align: center; padding: 0 100px;">LOG IN</h1>
+
+<form method="post" novalidate style="padding: 10px;">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <a href="{% url 'password_reset' %}" class="btn btn-link" style="text-align: center; text-decoration: none; padding-left: 80px;">Forgot your password?</a></br></br>
+  <button type="submit" class="btn btn-primary" style="padding: 5px 70px; margin-left: 60px;">Log in</button>
+  <h5><a href="{% url 'signup' %}" class="btn btn-link"style="text-decoration: none; padding-left: 120px;">SIGN UP</a></h5>
+</form>
+{% endblock content %}

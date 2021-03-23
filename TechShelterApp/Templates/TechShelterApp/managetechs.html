@@ -1,0 +1,47 @@
+{% extends 'TechShelterApp/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="item_div">
+
+    <h1 style="padding:0 30px 10px;">MANAGE All Products</h1>
+
+    <div class="itemsrow" style="margin: 0px 30px;">
+
+        <div class="itemscol" style="margin: 0 10px 0 0; overflow: hidden;border-style: solid;border-color: #fff;">
+            <a href="{% url 'add_tech' %}" style="text-decoration: none;">
+                <h1 class="plustech" style="padding: 10px 0;">+</h1>
+                <h3 style="font-size: 17px; padding: 4px 0;"><strong>Add New Product</strong></h3>
+            </a>
+        </div>
+        
+        {% for tech in techs %}
+        <div class="itemscol" style="margin: 0 7px 10px; overflow: hidden;border-style: solid;border-color: #fff;">
+
+            <a href="{% url 'update_tech' tech.id %}">
+                <div style="height: 100px; width: 100%; clear: both; position: relative; text-align: left;">
+                    <img src="{{tech.pictureURL}}" style="height: 100%; width:100%;"></img>
+                </div>
+                <div style="height: 10%; width: 100%; padding: 0px;clear: both;">
+                    <a style="font-size: 17px; padding-top: 0px; margin: 0; text-align: center; text-decoration: none; cursor: pointer; color: black;">
+                    <strong>{{tech.techname}}</strong></a>
+                    <div style="color: black; cursor: pointer; text-align: center;">
+                        <i>Update</i>
+                    </div>
+
+                    <div style="position: relative;background-color: rgba(0, 255, 255, 0); width: 100%; height:fit-content; float: left;margin:0px 0px">
+                        <!-- DELETE BUTTON -->
+                        <a href="{% url 'delete_tech' tech.id %}" style=" margin-top: 0px;">
+                            <button class="deletebtn">
+                                <i class="glyphicon glyphicon-trash" style="font-size: 17px;"></i></button>
+                        </a>
+
+                        <h3 class="pricetag" style="float: left; margin-left: 10px; cursor: pointer; padding-bottom: 5px;"></h3> ৳ {{tech.price}}</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

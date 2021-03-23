@@ -1,0 +1,14 @@
+{% extends 'TechShelterApp/actionpage.html' %}
+{% load static %}
+{% block content %}
+<h3  class="pagename" style="text-align: center; margin: 30px 0;">SURE TO DELETE "{{this_tech.techname}}"?</h3>
+
+  <form action="{% url 'delete_tech' this_tech.id %}" method="POST">
+    {% csrf_token %}
+    
+    <a href="{% url 'manage_techs' %}" class="btn btn-primary">Cancel</a>
+    <input class="btn btn-danger" type="submit" value="Delete" style="width: fit-content;">
+</form>
+{% endblock content %}
+
+
